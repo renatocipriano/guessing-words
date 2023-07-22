@@ -1,13 +1,13 @@
 <template>
-    <form action="">
-        <select name="" v-model="qtyCard">
+    <form @submit.prevent>
+        <select name="qtyCard" v-model="qtyCard" @change="updateQtyCard">
             <option value="" disabled selected>Select a option...</option>
             <option value="1">Solo</option>
             <option value="2">Dueto</option>
             <option value="3">Trio</option>
             <option value="4">Quarteto</option>
         </select>
-        <select name="" v-model="qtyCharacter">
+        <select name="qtyCharacter" v-model="qtyCharacter" @change="updateQtyCharacter">
             <option value="" disabled selected>Select a option...</option>
             <option value="4">4</option>
             <option value="5">5</option>
@@ -20,44 +20,16 @@
 </template>
 
 <script>
-import dictionary from "@/data/dictionary.json";
+import { mapState, mapActions } from 'vuex';
 
 export default {
     name: 'FormNewGame',
-    components: {
-    },
-    data() {
-        return {
-            dictionary,
-            qtyCard: "4",
-            qtyCharacter: "5",
-            game: {},
-            possibilities: [],
-        }
-    },
     methods: {
-        getRandom() {
-            return this.possibilities[Math.floor(Math.random() * this.possibilities.length)];
-        },
-        setGame() {
-            this.game.words = [];
-            this.game.tries = [];
-            for (let index = 0; index < this.qtyCard; index++) {
-                this.game.tries.push([])
-            }
-        },
-        startNewGame() {
-            this.setGame();
-            this.possibilities = this.dictionary.filter((word) => {
-                return word.length == this.qtyCharacter
-            });
-
-            while (this.game.words.length < this.qtyCard) {
-                let word = this.getRandom();
-                this.game.words.push(word.split(''))
-            }
-        },
-    }
+        ...mapActions(['startNewGame','updateQtyCard', 'updateQtyCharacter']),
+    },
+    computed: {
+        ...mapState(['qtyCard', 'qtyCharacter', 'game', 'possibilities']),
+    },
 }
 </script>
 

@@ -3,11 +3,11 @@
     <FormNewGameVue />
   </section>
 
-  <section>
+  <section v-show="game != null">
     <FormGuess />
   </section>
 
-  <section>
+  <section v-show="game != null">
     <TableGuess />
   </section>
 </template>
@@ -16,6 +16,9 @@
 import FormNewGameVue from '@/components/FormNewGame.vue';
 import FormGuess from '@/components/FormGuess.vue';
 import TableGuess from './components/TableGuess.vue';
+import dictionary from "@/data/dictionary.json";
+import { mapState } from 'vuex';
+
 export default {
   name: 'App',
   components: {
@@ -25,6 +28,12 @@ export default {
   },
   data() {
     return {}
+  },
+  beforeMount() {
+    this.$store.dispatch('setDictionary', dictionary);
+  },
+  computed: {
+    ...mapState(['game']),
   },
 }
 </script>
