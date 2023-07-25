@@ -15,6 +15,7 @@ export const mutations = {
         state.guess = payload;
     },
     SET_GAME(state) {
+        state.tries = []
         state.game = {}
         state.game.words = [];
         state.game.tries = [];
@@ -39,9 +40,11 @@ export const mutations = {
             JSON.stringify(state.game.words)
         );
 
+        state.tries.push(word.join(''));
         for (let indexCard = 0; indexCard < state.qtyCard; indexCard++) {
             let wordToGuess = wordsToGuess[indexCard]
 
+            let results = []
             for (let index = 0; index < word.length; index++) {
                 let cardCharacter = wordToGuess[index];
                 let guessCharacter = word[index];
@@ -56,8 +59,9 @@ export const mutations = {
                 } else if (wordToGuess.includes(guessCharacter)) {
                     result.status = 'maybe'
                 }
-                state.game.tries[indexCard].push(result)
+                results.push(result);
             }
+            state.game.tries[indexCard].push(results)
         }
         state.guess = null
     }
