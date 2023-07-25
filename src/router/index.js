@@ -5,6 +5,9 @@ const routes = [
         path: '/',
         name: 'HomePage',
         component: () => import('@/views/Home.vue'),
+        meta: {
+            title: 'Home - Guessing Words',
+        },
     },
     {
         path: '/:catchAll(.*)',
