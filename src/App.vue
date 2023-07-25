@@ -1,76 +1,42 @@
 <template>
-  <section>
+  <!-- Header -->
+  <div class="container"><Header /></div>
+
+  <!-- Content -->
+  <div class="container">
     <FormNewGameVue />
-  </section>
+    <FormGuess v-show="game != null" />
+    <TableGuess v-show="game != null" />
+  </div>
 
-  <section v-show="game != null">
-    <FormGuess />
-  </section>
-
-  <section v-show="game != null">
-    <TableGuess />
-  </section>
+  <!-- Footer -->
+  <div class="container"><Footer /></div>
 </template>
 
 <script>
-import FormNewGameVue from '@/components/FormNewGame.vue';
-import FormGuess from '@/components/FormGuess.vue';
-import TableGuess from './components/TableGuess.vue';
 import dictionary from "@/data/dictionary.json";
-import { mapState } from 'vuex';
+import Footer from "./components/Footer.vue";
+import FormGuess from "@/components/FormGuess.vue";
+import FormNewGameVue from "@/components/FormNewGame.vue";
+import Header from "./components/Header.vue";
+import TableGuess from "./components/TableGuess.vue";
+import { commonComputed } from "@/store/games/common";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     FormNewGameVue,
     FormGuess,
-    TableGuess
-  },
-  data() {
-    return {}
+    TableGuess,
+    Footer,
+    Header,
   },
   beforeMount() {
-    this.$store.dispatch('setDictionary', dictionary);
+    this.$store.dispatch("setDictionary", dictionary);
   },
   computed: {
-    ...mapState(['game']),
+    ...commonComputed,
   },
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-section,
-p {
-  display: block;
-}
-
-.d-block {
-  display: block
-}
-
-.trye {
-  border: 1px solid;
-  padding: 5px;
-}
-
-.correct {
-  background: green;
-}
-
-.maybe {
-  background: yellow;
-}
-
-.wrong {
-  background: red;
-}
-</style>

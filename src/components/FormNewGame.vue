@@ -1,36 +1,60 @@
 <template>
-    <form @submit.prevent>
-        <select name="qtyCard" v-model="qtyCard" @change="updateQtyCard">
-            <option value="" disabled selected>Select a option...</option>
-            <option value="1">Solo</option>
-            <option value="2">Dueto</option>
-            <option value="3">Trio</option>
-            <option value="4">Quarteto</option>
+  <form @submit.prevent>
+    <div class="row justify-content-center">
+      <div class="col-3">
+        <select
+          class="form-select"
+          name="qtyCard"
+          v-model="qtyCard"
+          @change="updateQtyCard"
+        >
+          <option value="" disabled="" selected="selected">
+            Select the number of cards...
+          </option>
+          <option value="1">One card</option>
+          <option value="2">Two card</option>
+          <option value="3">Three card</option>
+          <option value="4">Four card</option>
         </select>
-        <select name="qtyCharacter" v-model="qtyCharacter" @change="updateQtyCharacter">
-            <option value="" disabled selected>Select a option...</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
+      </div>
+      <div class="col-3">
+        <select
+          class="form-select"
+          name="qtyCharacter"
+          v-model="qtyCharacter"
+          @change="updateQtyCharacter"
+        >
+          <option value="" disabled="" selected="">
+            Select the number of characters...
+          </option>
+          <option value="4">Four characters</option>
+          <option value="5">Five characters</option>
+          <option value="6">Six characters</option>
+          <option value="7">Seven characters</option>
         </select>
-
-        <button @click="startNewGame">new game</button>
-    </form>
+      </div>
+      <div class="col-2">
+        <button
+          type="button"
+          class="btn btn-success w-100"
+          @click="startNewGame"
+        >
+          New Game
+        </button>
+      </div>
+    </div>
+  </form>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
-
+import { commonComputed, commonActions } from "@/store/games/common";
 export default {
-    name: 'FormNewGame',
-    methods: {
-        ...mapActions(['startNewGame','updateQtyCard', 'updateQtyCharacter']),
-    },
-    computed: {
-        ...mapState(['qtyCard', 'qtyCharacter', 'game', 'possibilities']),
-    },
-}
+  name: "FormNewGame",
+  methods: {
+    ...commonActions,
+  },
+  computed: {
+    ...commonComputed,
+  },
+};
 </script>
-
-<style></style>

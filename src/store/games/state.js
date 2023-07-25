@@ -1,6 +1,6 @@
 export const state = {
-    qtyCard: 4,
-    qtyCharacter: 4,
+    qtyCard: null,
+    qtyCharacter: null,
     guess: null,
     game: null,
     possibilities: [],

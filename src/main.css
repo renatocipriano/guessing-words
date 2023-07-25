@@ -1,0 +1,22 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.try {
+    padding: 0.6em 1em;
+    color: #FFF;
+    font-weight: bolder;
+    border: 10px solid;
+}
+
+.try.correct {
+    background: #A5D6A7;
+}
+
+.try.maybe {
+    background: #d3ad69;
+}
+
+.try.wrong {
+    background: #EF9A9A;
+}
