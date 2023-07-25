@@ -15,6 +15,7 @@ export const mutations = {
         state.guess = payload;
     },
     SET_GAME(state) {
+        state.tries = []
         state.game = {}
         state.game.words = [];
         state.game.tries = [];
@@ -39,6 +40,7 @@ export const mutations = {
             JSON.stringify(state.game.words)
         );
 
+        state.tries.push(word.join(''));
         for (let indexCard = 0; indexCard < state.qtyCard; indexCard++) {
             let wordToGuess = wordsToGuess[indexCard]
 

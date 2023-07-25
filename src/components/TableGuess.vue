@@ -9,14 +9,14 @@
 
       <tr>
         <th
-          :colspan="qtyCard"
+          :colspan="qtyCharacter"
           class="text-center"
           v-text="getTableTitleCaption(indexTries)"
         ></th>
       </tr>
 
       <tr v-for="(trye, indexTry) in tries" :key="indexTry">
-        <td v-for="(t, i) in trye" :key="i" class="try" :class="t.status">
+        <td v-for="(t, i) in trye" :key="i" class="try text-center" :class="t.status">
           {{ t.character }}
         </td>
       </tr>

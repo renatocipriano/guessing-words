@@ -3,7 +3,8 @@ export const state = {
     qtyCharacter: null,
     guess: null,
     game: null,
+    tries: [],
     possibilities: [],
     dictionary: [],
-    tries: [],
+
 }
