@@ -1,7 +1,8 @@
 <template>
   <div class="row justify-content-center" v-if="game != null">
     <table
-      class="col-3 m-2"
+      :class="getTableClass()"
+      class="p-4"
       v-for="(tries, indexTries) in game.tries"
       :key="indexTries"
     >
@@ -16,9 +17,13 @@
       </tr>
 
       <tr v-for="(trye, indexTry) in tries" :key="indexTry">
-        <td v-for="(t, i) in trye" :key="i" class="try text-center" :class="t.status">
-          {{ t.character }}
-        </td>
+        <td
+          v-for="(t, i) in trye"
+          :key="i"
+          class="try text-center"
+          :class="t.status"
+          v-text="t.character"
+        ></td>
       </tr>
     </table>
   </div>
@@ -34,6 +39,10 @@ export default {
   methods: {
     getTableTitleCaption(index) {
       return `Guess #${index + 1}`;
+    },
+    getTableClass() {
+      let qtyCard = this.$store.getters.getQtyCard;
+      return `col-${12 / qtyCard}`;
     },
   },
 };
