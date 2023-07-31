@@ -1,6 +1,8 @@
 export const mutations = {
     SET_DICTIONARY(state, payload) {
         state.dictionary = payload;
+        state.qtyCharacterOptions = Object.keys(payload);
+        state.qtyCharacterOptions.sort((a, b) => a - b);
     },
     SET_GUESS(state, payload) {
         state.guess.push(payload);
@@ -24,9 +26,7 @@ export const mutations = {
         }
     },
     SET_POSSIBILITIES(state) {
-        state.possibilities = state.dictionary.filter((word) => {
-            return word.length === state.qtyCharacter;
-        });
+        state.possibilities = state.dictionary[state.qtyCharacter].map((item) => item.label)
     },
     START_NEW_GAME(state) {
         while (state.game.words.length < state.qtyCard) {

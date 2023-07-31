@@ -27,10 +27,12 @@
           <option value="" disabled="" selected="">
             Select the number of characters...
           </option>
-          <option value="4">Four characters</option>
-          <option value="5">Five characters</option>
-          <option value="6">Six characters</option>
-          <option value="7">Seven characters</option>
+          <option
+            :value="qty"
+            v-for="qty in qtyCharacterOptions"
+            :key="qty"
+            v-number-to-words="qty"
+          ></option>
         </select>
       </div>
       <div class="col-2">

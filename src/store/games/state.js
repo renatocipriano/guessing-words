@@ -6,5 +6,5 @@ export const state = {
     tries: [],
     possibilities: [],
     dictionary: [],
-
+    qtyCharacterOptions: [],
 }

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import dictionary from "@/data/dictionary.json";
+import dictionary from "@/data/dictionary-ptbr.json";
 import Footer from "./components/Footer.vue";
 import Header from "./components/Header.vue";
 import { commonComputed } from "@/store/games/common";
@@ -21,7 +21,9 @@ export default {
   },
   components: { Footer, Header },
   beforeMount() {
-    this.$store.dispatch("setDictionary", dictionary);
+    if (this.$store.getters.getDictionary.length == 0) {
+      this.$store.dispatch("setDictionary", dictionary);
+    }
   },
   computed: {
     ...commonComputed,
