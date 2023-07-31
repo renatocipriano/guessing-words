@@ -4,11 +4,12 @@ export const commonComputed = {
     ...mapState([
         "qtyCard",
         "qtyCharacter",
+        "qtyCharacterOptions",
         "guess",
         "game",
         "possibilities",
         "dictionary",
-        "tries"
+        "tries",
     ]),
 };
 

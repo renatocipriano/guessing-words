@@ -5,4 +5,5 @@ export const getters = {
     getPossibilities: (state) => state.possibilities,
     getDictionary: (state) => state.dictionary,
     getTries: (state) => state.tries,
+    getQtyCharacterOptions: (state) => Object.keys(state.dictionary),
 }
