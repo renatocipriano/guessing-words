@@ -43,6 +43,8 @@
 
 <script>
 import { commonComputed } from "@/store/games/common";
+import { constants } from "@/constants";
+
 export default {
   name: "TableGuess",
   data() {
@@ -69,7 +71,9 @@ export default {
         return false;
       }
       let lastGuess = tries[tries.length - 1],
-        allCorrect = lastGuess.every((item) => item.status === "correct"),
+        allCorrect = lastGuess.every(
+          (item) => item.status === constants.STATUS_CORRECT
+        ),
         label = lastGuess.map((item) => item.character).join("");
 
       this.sucessfullGuess = {
