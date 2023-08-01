@@ -1,31 +1,43 @@
 <template>
   <div class="row justify-content-center" v-if="game != null">
-    <table
-      :class="getTableClass()"
+    <article
+      :class="getArticleClass()"
       class="p-4"
       v-for="(tries, indexTries) in game.tries"
       :key="indexTries"
     >
-      <caption v-text="`Result: ` + getTableTitleCaption(indexTries)"></caption>
+      <table class="w-100">
+        <thead>
+          <tr>
+            <th
+              :colspan="qtyCharacter"
+              class="text-center"
+              v-text="getTableTitleCaption(indexTries)"
+            ></th>
+          </tr>
+        </thead>
 
-      <tr>
-        <th
-          :colspan="qtyCharacter"
-          class="text-center"
-          v-text="getTableTitleCaption(indexTries)"
-        ></th>
-      </tr>
+        <tr v-for="(trye, indexTry) in tries" :key="indexTry">
+          <td
+            v-for="(t, i) in trye"
+            :key="i"
+            class="try text-center"
+            :class="t.status"
+            v-text="t.character"
+          ></td>
+        </tr>
 
-      <tr v-for="(trye, indexTry) in tries" :key="indexTry">
-        <td
-          v-for="(t, i) in trye"
-          :key="i"
-          class="try text-center"
-          :class="t.status"
-          v-text="t.character"
-        ></td>
-      </tr>
-    </table>
+        <tfoot v-if="checkAllStatusCorrect(tries)">
+          <tr>
+            <td :colspan="qtyCharacter">
+              <a :href="sucessfullGuess.url" target="_blank"
+                >See {{ sucessfullGuess.word }} in Dicio.com.br</a
+              >
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </article>
   </div>
 </template>
 
@@ -33,16 +45,38 @@
 import { commonComputed } from "@/store/games/common";
 export default {
   name: "TableGuess",
+  data() {
+    return {
+      sucessfullGuess: {
+        word: null,
+        url: null,
+      },
+    };
+  },
   computed: {
     ...commonComputed,
   },
   methods: {
-    getTableTitleCaption(index) {
+    getTableTitleCaption: (index) => {
       return `Guess #${index + 1}`;
     },
-    getTableClass() {
+    getArticleClass() {
       let qtyCard = this.$store.getters.getQtyCard;
       return `col-${12 / qtyCard}`;
+    },
+    checkAllStatusCorrect(tries) {
+      if (tries.length == 0) {
+        return false;
+      }
+      let lastGuess = tries[tries.length - 1],
+        allCorrect = lastGuess.every((item) => item.status === "correct"),
+        label = lastGuess.map((item) => item.character).join("");
+
+      this.sucessfullGuess = {
+        word: label,
+        url: `https://www.dicio.com.br/pesquisa.php?q=${label}`,
+      };
+      return allCorrect;
     },
   },
 };

@@ -8,12 +8,20 @@
           type="text"
           placeholder="Fill in your guess"
           aria-label="Fill in your guess"
-          v-model="guess"
-          @keyup="updateGuess"
+          v-model="myGuess"
         />
       </div>
       <div class="col-1">
-        <button type="button" class="btn btn-success w-100" @click="tryToGuess">
+        <button
+          type="button"
+          class="btn btn-success w-100"
+          :disabled="myGuess.length != qtyCharacter"
+          @click="
+            updateGuess(myGuess);
+            tryToGuess();
+            myGuess = '';
+          "
+        >
           Try
         </button>
       </div>
@@ -25,11 +33,10 @@
 import { commonComputed, commonActions } from "@/store/games/common";
 export default {
   name: "FormGuess",
-  methods: {
-    ...commonActions,
+  data() {
+    return { myGuess: "" };
   },
-  computed: {
-    ...commonComputed,
-  },
+  methods: { ...commonActions },
+  computed: { ...commonComputed },
 };
 </script>

@@ -39,29 +39,39 @@ export const mutations = {
         const wordsToGuess = JSON.parse(
             JSON.stringify(state.game.words)
         );
+        const checkAllStatusCorrect = (data) => {
+            return data == null ? false : data.every((item) => item.status === "correct");
+        }
 
         state.tries.push(word.join(''));
         for (let indexCard = 0; indexCard < state.qtyCard; indexCard++) {
-            let wordToGuess = wordsToGuess[indexCard]
+            let wordToGuess = wordsToGuess[indexCard],
+                lastTry = state.game.tries[indexCard],
+                lastPosition = lastTry.length > 0 ? lastTry[lastTry.length - 1] : null,
+                alreadySuccessfull = checkAllStatusCorrect(lastPosition);
 
-            let results = []
-            for (let index = 0; index < word.length; index++) {
-                let cardCharacter = wordToGuess[index];
-                let guessCharacter = word[index];
+            if (!alreadySuccessfull) {
+                let results = []
+                for (let index = 0; index < word.length; index++) {
+                    let cardCharacter = wordToGuess[index];
+                    let guessCharacter = word[index];
 
-                let result = {
-                    character: guessCharacter,
-                    status: 'wrong',
+                    let result = {
+                        character: guessCharacter,
+                        status: 'wrong',
+                    }
+
+                    if (cardCharacter == guessCharacter) {
+                        result.status = 'correct'
+                    } else if (wordToGuess.includes(guessCharacter)) {
+                        result.status = 'maybe'
+                    }
+                    results.push(result);
                 }
 
-                if (cardCharacter == guessCharacter) {
-                    result.status = 'correct'
-                } else if (wordToGuess.includes(guessCharacter)) {
-                    result.status = 'maybe'
-                }
-                results.push(result);
+                state.game.tries[indexCard].push(results)
             }
-            state.game.tries[indexCard].push(results)
+
         }
         state.guess = null
     }
