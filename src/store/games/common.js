@@ -10,6 +10,7 @@ export const commonComputed = {
         "possibilities",
         "dictionary",
         "tries",
+        "isPlaying"
     ]),
 };
 
@@ -22,5 +23,6 @@ export const commonActions = {
         "updateGuess",
         "startNewGame",
         "tryToGuess",
+        "resetGame",
     ]),
 };
