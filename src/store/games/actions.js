@@ -12,7 +12,7 @@ export const actions = {
         context.commit('UPDATE_QTY_CHARACTER', payload.target.value)
     },
     updateGuess(context, payload) {
-        context.commit('UPDATE_GUESS', payload.target.value)
+        context.commit('UPDATE_GUESS', payload)
     },
     startNewGame(context, payload) {
         context.commit('SET_GAME')
@@ -21,5 +21,8 @@ export const actions = {
     },
     tryToGuess(context) {
         context.commit('TRY_TO_GUESS')
+    },
+    resetGame(context) {
+        context.commit('RESET_GAME')
     }
 }
