@@ -21,5 +21,8 @@ export const actions = {
     },
     tryToGuess(context) {
         context.commit('TRY_TO_GUESS')
+    },
+    resetGame(context) {
+        context.commit('RESET_GAME')
     }
 }

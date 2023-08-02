@@ -45,7 +45,17 @@ export const mutations = {
         state.possibilities = state.dictionary[state.qtyCharacter].map((item) => item.label)
     },
     START_NEW_GAME(state) {
+        state.isPlaying = true;
         state.game.words = Array.from({ length: state.qtyCard }, () => randomWordFromPossibilities(state.possibilities));
+    },
+    RESET_GAME(state) {
+        state.isPlaying = false;
+        state.qtyCard = null;
+        state.qtyCharacter = null;
+        state.guess = null;
+        state.game = null;
+        state.tries = [];
+        state.possibilities = [];
     },
     TRY_TO_GUESS(state) {
         state.tries.push(state.guess);

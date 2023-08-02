@@ -1,7 +1,7 @@
 <template>
   <FormNewGameVue />
-  <FormGuess v-show="game != null" />
-  <TableGuess v-show="game != null" />
+  <FormGuess v-if="game != null" />
+  <TableGuess v-if="game != null" />
 </template>
 
 <script>
