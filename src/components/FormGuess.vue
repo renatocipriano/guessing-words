@@ -49,7 +49,11 @@ export default {
     },
     handleMyGuess() {
       this.error = "";
-      this.myGuess = this.myGuess.toUpperCase();
+      this.myGuess = this.myGuess
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toUpperCase();
+
       if (this.words.indexOf(this.myGuess) < 0) {
         this.error = "This word is not a possible guess";
         return false;
