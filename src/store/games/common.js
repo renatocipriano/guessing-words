@@ -10,7 +10,8 @@ export const commonComputed = {
         "possibilities",
         "dictionary",
         "tries",
-        "isPlaying"
+        "isPlaying",
+        "isCompleted",
     ]),
 };
 

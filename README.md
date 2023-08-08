@@ -2,7 +2,7 @@
 
 ## Description
 
-Guessing Words is an interactive and entertaining word guessing game inspired by [term.ooo](https://term.ooo/) that challenges players to guess the hidden word based on [Dicio - Dicionário Online de Português](https://www.dicio.com.br/). It is designed to test and improve players' vocabulary, language, and lateral thinking skills in a fun and engaging way.
+Guessing Words is an interactive and entertaining word guessing game inspired by [term.ooo](https://term.ooo/) that challenges players to guess the hidden word based on [Dicio - Dicionário Online de Português](https://www.dicio.com.br/). It is designed to test and improve players' vocabulary, language and thinking skills in a fun and engaging way.
 
 ### How to Play
 

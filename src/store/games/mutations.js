@@ -46,10 +46,12 @@ export const mutations = {
     },
     START_NEW_GAME(state) {
         state.isPlaying = true;
+        state.isCompleted = false;
         state.game.words = Array.from({ length: state.qtyCard }, () => randomWordFromPossibilities(state.possibilities));
     },
     RESET_GAME(state) {
         state.isPlaying = false;
+        state.isCompleted = false;
         state.qtyCard = null;
         state.qtyCharacter = null;
         state.guess = null;
@@ -74,5 +76,12 @@ export const mutations = {
             }
         }
         state.guess = null
+    },
+    IS_COMPLETED(state) {
+        state.isCompleted = false;
+        let corrects = state.game.tries.map(element => {
+            return checkAllStatusCorrect(element.at(-1))
+        });
+        state.isCompleted = corrects.filter((value) => value).length == state.qtyCard;
     }
 }
