@@ -1,5 +1,5 @@
 <template>
-  <form class="my-4" @submit.prevent>
+  <form class="my-4" @submit.prevent v-if="!isCompleted">
     <div class="row justify-content-center">
       <div class="col-6">
         <input
